@@ -1,0 +1,28 @@
+<div class="row mb-3">
+  <div class="col">
+    <h2>{{ messages.cart.shoppingCart }}</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <app-loading-placeholder
+      *ngIf="isPending" message="{{ messages.cart.loadingCart }}">
+    </app-loading-placeholder>
+
+    <p *ngIf="!isPending && (!items || !items.length)" class="text">
+      {{ messages.cart.yourCartIsEmpty }}
+      <a routerLink="/{{ locale }}" data-dismiss="modal" class="link">
+        {{ messages.common.continueShopping }}
+      </a>
+    </p>
+
+    <app-cart-item *ngFor="let item of items" [item]="item"></app-cart-item>
+  </div>
+</div>
+
+<app-cart-footer
+  *ngIf="!isPending && !!items && !!items.length"
+  [items]="items"
+  [homepageRedirect]="true">
+</app-cart-footer>

@@ -1,0 +1,16 @@
+<!--<a href="http://twitter.com" target="_blank">
+  <i class="fa fa-twitter"></i>
+</a>
+<a href="http://facebook.com" target="_blank">
+  <i class="fa fa-facebook-square"></i>
+</a>
+<a href="http://vk.com" target="_blank">
+  <i class="fa fa-vk"></i>
+</a>
+<a href="http://instagram.com" target="_blank">
+  <i class="fa fa-instagram"></i>
+</a>-->
+
+<a *ngFor="let link of socialLinks" href="{{ link.url }}" rel="nofollow" target="_blank">
+  <i class="fa {{ getFaClass(link.medium) }}"></i>
+</a>

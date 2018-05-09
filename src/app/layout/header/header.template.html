@@ -1,0 +1,66 @@
+<header id="header" [class.d-none]="isHidden">
+  <div class="container">
+    <div class="row pt-2 pb-3 pt-md-4 pb-md-4">
+
+      <!-- Slogan -->
+      <div class="col d-none col-lg-6 order-lg-1 d-lg-block mt-2">
+        <small>{{ messages.marketing.headerSlogan }}</small>
+      </div>
+
+      <!-- Collapse toggler -->
+      <div class="col order-1 d-md-none">
+        <button type="button" class="navbar-toggler"
+                data-toggle="collapse" data-target="#navbarCollapse">
+          <i id="navbarTogglerIndicator" class="fa fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Logo -->
+      <div id="misonaLogo" class="
+        col order-2 text-center
+        col-md-3 order-md-1 ml-md-0 text-md-left
+        col-lg-2 order-lg-3 mt-lg-3 mb-lg-3
+      ">
+        <a routerLink="/{{ locale }}" class="d-flex h-100">
+          <img src="assets/img/misona_logo_17.png" class="mt-auto mb-auto">
+        </a>
+      </div>
+
+      <!-- Auth Links -->
+      <div class="
+        col d-none
+        d-md-flex order-md-2 text-md-right
+        col-lg-6 order-lg-2 pr-lg-4 mt-lg-2
+      ">
+        <app-auth-links class="ml-auto"></app-auth-links>
+      </div>
+
+      <!-- Cart Button -->
+      <div class="
+        col order-3 text-right pr-0
+        col-md-2 order-md-4 text-md-center mt-md-3 pr-md-2
+        order-lg-5 pr-lg-4 mb-lg-3
+      ">
+        <app-cart-button></app-cart-button>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="
+        col-12 order-4 mt-2
+        col-md-10 order-md-3 mt-md-3 mb-lg-3
+        col-lg-8 order-lg-4
+      ">
+        <app-search-bar></app-search-bar>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="collapse navbar-collapse d-md-none" id="navbarCollapse">
+
+    <app-navbar-collapse></app-navbar-collapse>
+
+  </div>
+</header>
+

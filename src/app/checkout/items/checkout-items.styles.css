@@ -1,0 +1,65 @@
+.summary-list {
+  max-height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+}
+
+.summary-item {
+  margin-bottom: 0.75rem;
+}
+
+.summary-img img {
+  position: relative;
+}
+
+.summary-img .badge {
+  position: absolute;
+  top: -0.5rem;
+  right: 0.5rem;
+}
+
+.summary-title {
+  padding-right: 0;
+}
+
+.summary-title, .summary-price, .summary-total {
+  color: #585858;
+}
+
+.summary-title, .summary-price {
+  font-size: 14px;
+}
+
+.summary-toggle {
+  padding: 1.25rem 0;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 0.75rem;
+}
+
+.summary-toggle span {
+  display: flex;
+}
+
+.summary-toggle span:last-child {
+  display: flex;
+  color: #585858;
+  margin-left: auto;
+  float: right;
+}
+
+.summary-toggle span:first-child {
+  align-items: center;
+}
+
+.summary-total {
+  font-size: 1rem;
+}
+
+.summary-total .summary-total-price {
+  font-size: 1.1rem;
+}

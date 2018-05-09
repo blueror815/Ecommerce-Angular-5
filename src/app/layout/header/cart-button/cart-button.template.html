@@ -1,0 +1,9 @@
+<button id="cartButton" type="button" class="d-flex ml-auto"
+        data-toggle="modal" data-target="#cartModal">
+  <i class="fa fa-lg fa-shopping-cart"></i>
+  <span>&nbsp;</span>
+  <span class="d-none d-md-inline">{{ messages.cart.cart }}</span>
+  <span *ngIf="totalQuantity > 0" class="badge badge-pill badge-danger">
+            {{ totalQuantity }}
+          </span>
+</button>

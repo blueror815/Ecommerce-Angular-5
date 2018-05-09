@@ -1,0 +1,53 @@
+<app-loading-placeholder *ngIf="authChecker.pending"></app-loading-placeholder>
+
+<article *ngIf="!authChecker.pending" id="signInPage" class="row">
+  <div class="col col-sm-10 col-md-6 col-lg-5 col-xl-4 ml-auto mr-auto text-center">
+    <h1>{{ messages.auth.login }}</h1>
+
+    <div *ngIf="isAuthInvalid" class="error-block text-left">
+      <span>{{ messages.auth.invalidLoginCredentials }}</span>
+    </div>
+
+    <form (submit)="onSubmit()" ngNativeValidate>
+      <div class="clearfix mb-4"></div>
+
+      <div class="form-group">
+        <input
+          [(ngModel)]="email"
+          required
+          type="email"
+          name="email"
+          placeholder="{{ messages.user.email }}"
+          class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input
+          [(ngModel)]="password"
+          required
+          type="password"
+          name="password"
+          placeholder="{{ messages.user.password }}"
+          class="form-control">
+      </div>
+
+      <p>
+        <a id="passwordResetLink" routerLink="/{{ locale }}/auth/reset-password" class="link">
+          {{ messages.auth.forgotYourPassword }}</a>
+      </p>
+
+      <app-submit-button
+        label="{{ messages.auth.signIn }}"
+        [isPending]="isFormPending">
+      </app-submit-button>
+
+      <p class="mt-4">
+        <span class="text">{{ messages.common.or }}</span>
+        <a id="returnLink" routerLink="/{{ locale }}" class="link">
+          {{ messages.common.returnToStore }}
+        </a>
+      </p>
+    </form>
+  </div>
+</article>
+

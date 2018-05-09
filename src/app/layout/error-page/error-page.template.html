@@ -1,0 +1,31 @@
+<div class="row text-center">
+  <div class="col-11 col-sm-9 col-md-7 col-lg-5 col-xl-4 text-left ml-auto mr-auto">
+    <h1 class="text-center mb-4">{{ messages.errors.errorOccurred }}</h1>
+
+    <p class="text mb-4">
+      {{ messages.errors.sorryWeEncounteredError  }}
+    </p>
+
+    <ul class="mb-4">
+      <li *ngIf="isFatal" class="text-danger">
+        {{ messages.errors.internalApplicationError }}
+      </li>
+      <li *ngIf="isOffline" class="text-danger">
+        {{ messages.errors.couldNotConnectToServer }}
+      </li>
+      <li *ngIf="isTimeout" class="text-danger">
+        {{ messages.errors.timeout10sExceeded }}
+      </li>
+    </ul>
+
+    <p class="text">
+      <span>{{ messages.common.clickTo }}&nbsp;</span>
+      <a href="{{ previousRoute }}" class="link">{{ messages.common.tryAgain }}</a>.
+    </p>
+    <p class="text">
+      <span>{{ messages.errors.ifErrorRemains }}</span>
+      <a routerLink="/{{ locale }}/info/help" class="link">
+        {{ messages.info.contactUs.toLowerCase() }}</a>.
+    </p>
+  </div>
+</div>

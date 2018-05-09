@@ -1,0 +1,65 @@
+<app-loading-placeholder *ngIf="authChecker.pending"></app-loading-placeholder>
+
+<article *ngIf="!authChecker.pending" id="signUpPage" class="row">
+  <div class="col col-sm-10 col-md-6 col-lg-5 col-xl-4 ml-auto mr-auto text-center">
+    <h1 class="mb-4">{{ messages.auth.createAccount }}</h1>
+
+    <div *ngIf="isEmailTaken" class="error-block text-left">
+      <span>
+        {{ messages.validation.thisEmailAddressIsTaken }}
+        <a routerLink="/{{ locale }}/auth/reset-password" class="link">
+          {{ messages.auth.resetYourPassword }}</a>.
+      </span>
+    </div>
+
+    <form (submit)="onSubmit()" ngNativeValidate>
+      <div class="form-group">
+        <input
+          type="text"
+          [(ngModel)]="fullName"
+          required
+          pattern="^[^0-9`~!@#№$%^&*()_=+\[\]{};:&quot;\\|,.<>/?]+$"
+          name="fullName"
+          placeholder="{{ messages.user.fullName }}"
+          title="{{ messages.validation.fullNameRule }}"
+          class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input
+          type="email"
+          [(ngModel)]="email"
+          required
+          name="email"
+          placeholder="{{ messages.user.email }}"
+          class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input
+          type="password"
+          [(ngModel)]="password"
+          required
+          minlength="4"
+          pattern="^[\x21-\x7e]+$"
+          name="password"
+          placeholder="{{ messages.user.password }}"
+          title="{{ messages.validation.passwordRule }}"
+          class="form-control">
+      </div>
+
+      <app-submit-button
+        label="{{ messages.auth.create }}"
+        [isPending]="isFormPending">
+      </app-submit-button>
+
+      <p class="mt-4">
+        <span class="text">{{ messages.common.or }}</span>
+        <a id="returnLink" routerLink="/{{ locale }}" class="link">
+          {{ messages.common.returnToStore }}
+        </a>
+      </p>
+    </form>
+  </div>
+</article>
+

@@ -1,0 +1,63 @@
+<app-loading-placeholder
+  *ngIf="!product"
+  message="{{ messages.product.loadingProduct }}...">
+</app-loading-placeholder>
+
+<div *ngIf="product" class="row">
+  <div class="product-images col-12 text-center col-md-6 col-lg-5">
+    <img src="{{ mainImageSrc }}"
+         (touchstart)="onTouchStart($event)"
+         (touchmove)="onTouchMove($event)"
+         (touchend)="onTouchEnd()"
+         class="img-fluid">
+    <ul>
+      <li *ngFor="let imageUrl of product.imageUrls">
+        <span (click)="changeMainImage(imageUrl)" style="cursor: pointer;">
+          <img src="{{ imageUrl }}" class="img-fluid img-thumbnail">
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-12 col-md-6 col-lg-7 mt-5 mt-md-0 mb-4 mb-lg-5 pl-md-5">
+    <h2>
+      <span>{{ getCategory(product.categoryId) }}: {{ product.title }}</span>
+      <!--<span style="color: #212529; text-transform: none; font-weight: lighter; opacity: 0.5;">
+        ({{ getCategory(product.categoryId) }})
+      </span>-->
+    </h2>
+    <!--<div class="row align-items-center flex-nowrap mt-3">
+      <div class="col-3 col-md-4 col-lg-3 col-xl-2">
+        <h1>{{ product.price | newCurrency }}</h1>
+      </div>
+      <div class="col text-right mr-auto text-sm-left">
+        <span style="opacity: 0.5;">{{ messages.marketing.freeInternationalShipping }}</span>
+      </div>
+    </div>-->
+
+    <div class="row">
+      <div class="col">
+        <h1 class="d-flex float-left mr-3">{{ product.price | newCurrency }}</h1>
+        <span class="d-flex mt-1 float-left" style="opacity: 0.5;">
+          {{ messages.marketing.freeInternationalShipping }}
+        </span>
+      </div>
+    </div>
+
+    <button type="button" class="button-primary mt-5" (click)="addToCart()">
+      <i class="fa fa-lg fa-cart-plus mr-2"></i>
+      <span>{{ messages.cart.addToCart }}</span>
+    </button>
+
+    <p *ngIf="product.description" class="mt-5">
+      <span (click)="showDescription()" class="link" [class.d-none]="descriptionShown">
+        {{ messages.product.showTranslatedDescription }}
+        <i class="fa fa-caret-down"></i>
+      </span>
+      <span class="text translate" [class.d-none]="!descriptionShown">
+        <iframe id="idIframe" [src]="iframeUrl" (load)="onIframeLoad()">
+          {{ product.description }}</iframe>
+      </span>
+    </p>
+  </div>
+</div>

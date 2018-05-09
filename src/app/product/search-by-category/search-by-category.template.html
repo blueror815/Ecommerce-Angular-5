@@ -1,0 +1,10 @@
+<!--<div *ngIf="category" class="row">
+  <div class="col">
+    <p class="text">{{ messages.product.category }}: <b>{{ category.name }}</b></p>
+  </div>
+  <div class="text col col-sm-4 col-md-3 col-lg-2 text-right pr-lg-4">
+    <app-select-currency></app-select-currency>
+  </div>
+</div>-->
+
+<app-search-results *ngIf="products$" [products$]="products$"></app-search-results>

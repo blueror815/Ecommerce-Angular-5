@@ -1,0 +1,49 @@
+<div *ngIf="items">
+  <div class="d-md-none">
+    <a href="#" class="summary-toggle link"
+       data-toggle="collapse" data-target="#summaryCollapse">
+        <span>
+          <i class="fa fa-shopping-cart"></i>
+          <span style="margin: 0 0.25rem;">{{ messages.checkout.showOrderSummary }}</span>
+          <i class="fa fa-caret-down"></i>
+        </span>
+      <span style="color: #585858;">{{ total | newCurrency:false }}</span>
+    </a>
+  </div>
+
+  <div id="summaryCollapse" class="collapse d-md-block">
+
+    <div class="summary-list ">
+      <div *ngFor="let item of items" class="summary-item row align-items-center">
+        <div class="summary-img col-3">
+          <div class="img-square mb-2">
+            <div class="img-content img-thumbnail">
+              <img src="{{ item.product.imageUrls[0] }}">
+            </div>
+          </div>
+          <!--<img src="{{ item.product.imageUrls[0] }}" class="img-thumbnail">-->
+          <span class="badge badge-secondary badge-pill">{{ item.quantity }}</span>
+        </div>
+        <div class="summary-title col">
+          <span>{{ getCategory(item.product.categoryId) }}{{ item.product.title }}</span>
+        </div>
+        <div class="summary-price col-3 text-right">
+          {{ getPrice(item.product.price) | newCurrency:false:currency.code }}
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="summary-total">
+      <div class="row">
+        <div class="col ml-2">{{ messages.order.total }}</div>
+        <div class="col text-right">
+          <span style="font-size: 12px; color: #969696; vertical-align: middle;">
+            {{ currency.code }}
+          </span>
+          <span class="ml-1 mr-3">{{ total }}</span>
+        </div>
+      </div>
+    </div>
+    <hr class="mb-4 d-md-none">
+  </div>
+</div>

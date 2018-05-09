@@ -1,0 +1,25 @@
+<!--<div class="d-flex align-items-baseline">
+  <label class="d-none d-sm-inline">{{ messages.settings.currency }}:&nbsp;</label>
+  <select title="{{ messages.settings.currency }}" class="w-100"
+          [(ngModel)]="currency"
+          (change)="changeCurrency()">
+    <option *ngFor="let currency of currencies" value="{{ currency }}">
+      {{ currency }}
+    </option>
+  </select>
+</div>-->
+
+<div class="d-flex align-items-baseline">
+  <i class="fa fa-fw mr-1"
+     [class.fa-usd]="currency === 'USD'"
+     [class.fa-eur]="currency === 'EUR'"
+     [class.fa-ruble]="currency === 'RUB'"
+     [class.fa-yen]="currency === 'JPY'"></i>
+  <select title="{{ messages.settings.currency }}" class="w-100"
+          [(ngModel)]="currency"
+          (change)="changeCurrency()">
+    <option *ngFor="let currency of currencies" value="{{ currency }}">
+      {{ currency }}
+    </option>
+  </select>
+</div>

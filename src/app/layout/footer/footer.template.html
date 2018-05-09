@@ -1,0 +1,72 @@
+<!-- Footer -->
+<footer [class.d-none]="isHidden">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <a (click)="scrollToTop()" class="caret ml-auto mr-auto" style="cursor: pointer;">
+          <i class="fa fa-lg fa-arrow-up"></i></a>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-12 text-center col-sm-3 text-sm-left col-md-2 col-lg-2">
+        <h4>{{ messages.info.needHelp }}</h4>
+        <a routerLink="/{{ locale }}/info/help">{{ messages.info.faq }}</a><br>
+        <a routerLink="/{{ locale }}/info/help" fragment="contact-us">{{ messages.info.feedback }}</a>
+      </div>
+
+      <div class="settings
+          col-12 text-center
+          col-sm-5 text-sm-left
+          col-md-4 pl-md-5
+          col-lg-3 pl-lg-3 pr-lg-4">
+        <h4>{{ messages.settings.settings }}</h4>
+        <p class="footer-settings-item mb-2"><app-select-language></app-select-language></p>
+        <p class="footer-settings-item mb-2"><app-select-currency></app-select-currency></p>
+        <p class="footer-settings-item"><app-select-country></app-select-country></p>
+      </div>
+
+      <div class="
+          col-12 text-center
+          col-sm-4 text-sm-left
+          col-md-3
+          col-lg-2">
+        <h4>{{ messages.info.company }}</h4>
+        <a routerLink="/{{ locale }}/info/company-info">{{ messages.info.companyInfo }}</a><br>
+        <a href="{{ messages.info.blogLink }}" target="_blank">{{ messages.info.blog }}</a><br>
+        <a routerLink="/{{ locale }}/info/terms-of-service">{{ messages.info.termsOfService }}</a><br>
+        <a routerLink="/{{ locale }}/info/privacy-policy">{{ messages.info.privacyPolicy }}</a>
+      </div>
+
+      <div class="col-10 text-center col-sm-12 col-md-3 text-md-left col-lg-5">
+        <h4>{{ messages.info.whatIsMisona }}</h4>
+        <p>{{ messages.info.misonaDescription }}</p>
+      </div>
+    </div>
+
+    <hr class="mt-3">
+
+    <div class="bottom row">
+      <div class="social col-12 text-center col-sm-6 text-sm-left">
+        <span class="copy ml-auto ml-sm-0">
+          <span>&copy;</span>
+          <span>&nbsp;Misona</span>
+          <span>&nbsp;Inc.</span>
+        </span>
+
+        <div class="mr-auto">
+          <app-social-links></app-social-links>
+        </div>
+
+      </div>
+      <div class="payment col-12 flex-nowrap text-center col-sm-6 text-sm-right">
+        <i class="fa fa-cc-paypal ml-auto"></i>
+        <i class="fa fa-cc-visa"></i>
+        <i class="fa fa-cc-mastercard"></i>
+        <i class="fa fa-cc-amex"></i>
+        <i class="fa fa-cc-diners-club"></i>
+        <i class="fa fa-cc-discover mr-auto mr-sm-0"></i>
+      </div>
+    </div>
+  </div>
+</footer>

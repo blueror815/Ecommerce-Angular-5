@@ -1,0 +1,22 @@
+<!--<div class="d-flex align-items-baseline">
+  <label class="d-none d-sm-inline">
+    {{ messages.settings.language }}:&nbsp;
+  </label>
+
+  <select title="{{ messages.settings.language  }}" class="w-100"
+          [(ngModel)]="locale" (change)="onChange()">
+    <option *ngFor="let language of languages" value="{{ language.code }}">
+      {{ language.name }}
+    </option>
+  </select>
+</div>-->
+
+<div class="d-flex align-items-baseline">
+  <i class="fa fa-language fa-fw mr-1"></i>
+  <select title="{{ messages.settings.language  }}" class="w-100"
+          [(ngModel)]="locale" (change)="onChange()">
+    <option *ngFor="let language of languages" value="{{ language.code }}">
+      {{ language.name }}
+    </option>
+  </select>
+</div>

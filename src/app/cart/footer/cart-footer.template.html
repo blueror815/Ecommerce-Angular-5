@@ -1,0 +1,18 @@
+<div class="row text-right">
+  <div class="col-12 mt-4 mb-3">
+    <span class="text">{{ messages.order.total }}&nbsp;</span>
+    <span class="text" style="font-size: 18px; font-weight: bold;">
+      {{ total | newCurrency:false }}
+    </span>
+  </div>
+  <div class="total-buttons col-12 mt-3">
+    <span (click)="onContinueShopping()" class="link ml-auto" data-dismiss="modal">
+      <span class="d-none d-sm-inline">&lt;</span>
+      {{ messages.common.continueShopping }}
+    </span>
+    <button type="button" (click)="checkout()" class="button-primary ml-4">
+      <i class="fa fa-shopping-cart"></i>
+      <span>&nbsp;&nbsp;{{ messages.checkout.checkout }}</span>
+    </button>
+  </div>
+</div>

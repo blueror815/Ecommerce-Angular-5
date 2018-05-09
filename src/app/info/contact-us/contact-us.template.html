@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col col-md-7 col-lg-5">
+    <h2 class="mb-3">{{ messages.info.contactUs }}</h2>
+
+    <form (submit)="onSubmit()" ngNativeValidate>
+      <div *ngIf="isSuccess" class="success-block">
+        {{ messages.info.thanksForContactingUs }}
+      </div>
+      <div *ngIf="isCaptchaFailed" class="error-block">
+        {{ messages.info.confirmYouAreNotRobot }}
+      </div>
+
+      <div *ngIf="!userData" class="form-group">
+        <input class="form-control"
+               [(ngModel)]="fullName"
+               type="text"
+               required
+               pattern="^[^0-9`~!@#№$%^&*()_=+\[\]{};:&quot;\\|,.<>/?]+$"
+               name="fullName"
+               placeholder="{{ messages.user.fullName }}"
+               title="{{ messages.validation.fullNameRule }}">
+      </div>
+
+      <div *ngIf="!userData" class="form-group">
+        <input class="form-control"
+               [(ngModel)]="email"
+               type="email"
+               required
+               name="email"
+               placeholder="{{ messages.user.email }}">
+      </div>
+
+      <div class="form-group position-relative">
+        <input
+          [(ngModel)]="orderNumber"
+          name="orderNumber"
+          pattern="^[0-9]+$"
+          placeholder="{{ messages.order.orderNumber }}"
+          title="{{ messages.validation.digitsOnly }}"
+          class="form-control" style="padding-left: 24px;">
+        <span class="position-absolute"
+              style="top: 7.5px; left: 13px; color: gray;">#</span>
+      </div>
+
+      <div class="form-group">
+        <textarea class="form-control"
+          [(ngModel)]="message"
+          required
+          rows="6"
+          placeholder="{{ messages.info.message }}"
+          name="message"></textarea>
+      </div>
+
+      <div class="mb-3" [class.d-none]="!!userData">
+        <app-recaptcha (value$)="onCaptchaValue($event)"></app-recaptcha>
+      </div>
+
+      <app-submit-button
+        [isPending]="isPending"
+        [label]="messages.common.send">
+      </app-submit-button>
+    </form>
+
+  </div>
+</div>

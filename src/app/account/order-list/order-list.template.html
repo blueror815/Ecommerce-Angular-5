@@ -1,0 +1,67 @@
+<app-loading-placeholder *ngIf="authChecker.pending"></app-loading-placeholder>
+
+<div *ngIf="!authChecker.pending && !!userData">
+
+  <div class="row mb-4">
+    <div class="col">
+      <h1>{{ messages.account.myAccount }}</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-8 col-xl-7">
+      <h3 class="mb-3" style="text-transform: none;">{{ messages.order.orderHistory }}</h3>
+
+      <div *ngIf="!orders">
+        <span class="text">
+          <i class="fa fa-spinner fa-pulse"></i>
+        </span>
+      </div>
+
+      <ng-container *ngIf="orders">
+        <div *ngIf="!orders.length">
+          <p class="text">
+            {{ messages.order.youHaveNotPlacedOrdersYet }}
+            <a routerLink="/{{ locale }}" class="link">
+              {{ messages.common.continueShopping }}</a>
+          </p>
+        </div>
+
+        <table *ngIf="orders.length" class="table text">
+          <thead>
+          <tr>
+            <th style="white-space: nowrap;">{{ messages.order.order }} #</th>
+            <th>{{ messages.order.date }}</th>
+            <th>{{ messages.order.status }}</th>
+            <th>{{ messages.order.total }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let order of orders">
+            <td><a routerLink="/{{ locale }}/account/order/{{ order._id }}" class="link">
+              #{{ order.unique_id }}</a></td>
+            <td>{{ order.created_at | newDate:true }}</td>
+            <td>{{ order.status | orderStatus }}</td>
+            <td>{{ getTotal(order) | newCurrency:false:order.currency.code }}</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="text-center">
+              <span (click)="displayOrders()" class="link" [class.d-none]="isAllShown">
+                {{ messages.common.showMore }} <i class="fa fa-caret-down"></i>
+              </span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+
+    <div class="col-12 col-md-4 ml-auto">
+      <h3 class="mt-3 mt-md-0" style="text-transform: none;">{{ messages.account.accountDetails }}</h3>
+      <p class="mt-3 text">
+        <span>{{ userData.fullName }}</span><br>
+        <span>{{ userData.email }}</span>
+      </p>
+    </div>
+  </div>
+</div>

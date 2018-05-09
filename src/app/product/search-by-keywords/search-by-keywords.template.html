@@ -1,0 +1,13 @@
+<!--<div *ngIf="keywords" class="row">
+  <div class="col">
+    <p class="text mb-0">
+      {{ messages.product.searchResultsFor }}
+      <b>"{{ keywords }}"</b>
+    </p>
+  </div>
+  <div class="text col col-sm-4 col-md-3 col-lg-2 text-right pr-lg-4">
+    <app-select-currency></app-select-currency>
+  </div>
+</div>-->
+
+<app-search-results [products$]="products$"></app-search-results>

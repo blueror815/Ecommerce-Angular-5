@@ -1,0 +1,8 @@
+<form (submit)="onSubmit()" class="search-bar">
+  <input type="search" name="search"
+         placeholder="{{ messages.product.searchBarPlaceholder }}"
+         [(ngModel)]="keywords">
+  <button type="submit">
+    <i class="fa fa-lg fa-search"></i>
+  </button>
+</form>

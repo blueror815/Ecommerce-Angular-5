@@ -1,0 +1,167 @@
+<div class="row">
+  <div class="col">
+    <a routerLink="/{{ locale }}">
+      <img src="assets/img/misona_gray_logo.png" height="30">
+    </a>
+  </div>
+</div>
+
+<div *ngIf="isPending" class="pending-placeholder text-center">
+    <span class="text-muted">
+      <span>{{ messages.checkout.gettingOrderReady }}</span><br>
+      <i class="fa fa-spinner fa-pulse"></i>
+    </span>
+</div>
+
+<div *ngIf="!isPending" class="row mt-3 mt-md-5">
+  <div class="col-12 col-md-6 col-lg-5 ml-lg-auto order-md-2">
+    <app-checkout-items [items]="items" [currency]="currency"></app-checkout-items>
+  </div>
+
+  <div class="col-12 col-md-6 order-md-1">
+    <form (submit)="onSubmit()" ngNativeValidate>
+      <div class="row align-items-center">
+        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+          <h5>{{ messages.checkout.customerInfo }}</h5>
+        </div>
+        <div class="col-12 col-sm-6 text-sm-right col-md-12 text-md-left col-lg-6 text-lg-right">
+            <span *ngIf="!userData" style="font-size: 14px;">
+              <span class="text">{{ messages.auth.alreadyHaveAccount }}</span>
+              <a routerLink="/{{ locale }}/auth/sign-in" class="link">
+                {{ messages.auth.logIn }}</a>
+            </span>
+          <span *ngIf="userData">
+              <span class="text">{{ userData.fullName }}</span><br>
+              <span (click)="logout()" class="link">{{ messages.auth.logOut }}</span>
+            </span>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <input [(ngModel)]="deliveryData.email"
+               (blur)="storeDeliveryData()"
+               [disabled]="!!userData"
+               required
+               type="email"
+               name="email"
+               placeholder="{{ messages.user.email }}"
+               class="form-control">
+        <label>{{ messages.user.email }}</label>
+      </div>
+
+      <h5 class="mt-4 mt-md-5">{{ messages.delivery.shippingAddress }}</h5>
+
+      <div class="form-group mt-3">
+        <select [(ngModel)]="deliveryData.country"
+                (change)="storeDeliveryData()"
+                required
+                name="country"
+                title="{{ messages.delivery.country }}"
+                class="form-control" style="height: 3rem">
+          <option *ngFor="let country of countries" value="{{ country.code }}">
+            {{ country.name }}
+          </option>
+        </select>
+        <label>{{ messages.delivery.country }}</label>
+      </div>
+
+      <div class="form-group">
+        <input [(ngModel)]="deliveryData.postalCode"
+               (blur)="storeDeliveryData()"
+               required
+               pattern="^[\x20-\x7e]+$"
+               name="postalCode"
+               placeholder="{{ messages.delivery.postalCode }}"
+               title="{{ messages.validation.addressRule }}"
+               class="form-control">
+        <label>{{ messages.delivery.postalCode }}</label>
+      </div>
+
+      <div class="form-group">
+        <input [(ngModel)]="deliveryData.city"
+               (blur)="storeDeliveryData()"
+               required
+               pattern="^[\x20-\x7e]+$"
+               name="city"
+               placeholder="{{ messages.delivery.city }}"
+               title="{{ messages.validation.addressRule }}"
+               class="form-control">
+        <label>{{ messages.delivery.city }}</label>
+      </div>
+
+      <div class="form-group">
+        <input [(ngModel)]="deliveryData.address"
+               (blur)="storeDeliveryData()"
+               required
+               pattern="^[\x20-\x7e]+$"
+               name="address"
+               placeholder="{{ messages.delivery.address }}"
+               title="{{ messages.validation.addressRule }}"
+               class="form-control">
+        <label>{{ messages.delivery.address }}</label>
+      </div>
+
+      <div class="form-group">
+        <input [(ngModel)]="deliveryData.fullName"
+               (blur)="storeDeliveryData()"
+               required
+               pattern="^[\x20-\x7e]+$"
+               name="fullName"
+               placeholder="{{ messages.delivery.fullName }}"
+               title="{{ messages.validation.addressRule }}"
+               class="form-control">
+        <label>{{ messages.delivery.fullName }}</label>
+      </div>
+
+      <div class="form-group">
+        <input [(ngModel)]="deliveryData.phone"
+               (blur)="storeDeliveryData()"
+               required
+               pattern="^[0-9\-\+\(\)\s]+$"
+               name="phone"
+               placeholder="{{ messages.delivery.phone }}"
+               title="{{ messages.validation.phoneRule }}"
+               class="form-control">
+        <label>{{ messages.delivery.phone }}</label>
+      </div>
+
+      <div class="row">
+        <div class="col pt-2 pt-lg-3">
+            <span class="text-muted">
+              {{ messages.checkout.youWillReceiveYourPackage }}
+            </span>
+        </div>
+      </div>
+
+      <div class="row align-items-center mt-4">
+        <div class="
+              col-12 text-center
+              col-sm-6 order-sm-2 text-sm-right
+              col-md-12 order-md-1
+              col-lg-7 order-lg-2
+              col-xl-6">
+          <button type="submit" class="btn btn-primary p-3 w-100"
+                  style="text-transform: none;"
+                  [class.is-pending]="isFormPending">
+              <span class="label">
+                <span>{{ messages.checkout.pay }}</span>&nbsp;<span>{{ total | newCurrency:false }}</span>&nbsp;<span>{{ messages.checkout.withPayPal }}</span>
+              </span>
+            <span class="pending-indicator">
+                <span class="fa fa-spinner fa-pulse"></span>
+              </span>
+          </button>
+        </div>
+        <div class="
+              col-12 text-center mt-3
+              col-sm-6 order-sm-1 text-sm-left mt-sm-0
+              col-md-12 order-md-2 text-md-center mt-md-3
+              col-lg-5 order-lg-1 text-lg-left mt-lg-0
+              col-xl-6">
+          <a *ngIf="!isCartDisabled" routerLink="/{{ locale }}/cart" class="link">
+            &lt;&nbsp;{{ messages.checkout.returnToCart }}
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

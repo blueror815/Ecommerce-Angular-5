@@ -1,0 +1,36 @@
+<div class="cart-item row">
+  <div class="col-4 mb-2 col-sm-3 mb-sm-0 col-lg-2">
+    <!--<img src="{{ item.product.imageUrls[0] }}" class="img-thumbnail">-->
+    <div class="img-square mb-2">
+      <div class="img-content img-thumbnail">
+        <img src="{{ item.product.imageUrls[0] }}">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 p-0 mb-1 col-sm-8 col-lg">
+    <span>{{ getCategory(item.product.categoryId) }}{{ item.product.title }}</span>
+  </div>
+
+  <div class="remove col-1 text-right col-lg-1 order-lg-3">
+    <span (click)="removeItem()" class="fa fa-lg fa-times-circle"></span>
+  </div>
+
+  <div class="
+          d-flex flex-nowrap align-items-start
+          col-5 col-sm-3 ml-sm-auto col-lg-2 order-lg-1">
+    <button type="button"
+            (click)="decrement()">
+      &ndash;</button>
+    <input title="Quantity" class="text-center" style="width: 3rem;"
+           (blur)="onBlur($event)"
+           value="{{ item.quantity }}">
+    <button type="button"
+            (click)="increment()">
+      +</button>
+  </div>
+
+  <div class="price col-6 text-right col-sm-2 col-lg-1 order-lg-2">
+    <span>{{ item.product.price | newCurrency }}</span>
+  </div>
+</div>

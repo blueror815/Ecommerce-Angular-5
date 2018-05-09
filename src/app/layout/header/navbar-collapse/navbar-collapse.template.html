@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a (click)="redirectToHomePage()" class="nav-link">
+            <i class="fa fa-home fa-fw"></i>
+            {{ messages.common.home }}
+          </a>
+        </li>
+        <li *ngIf="!isAuthenticated" class="nav-item">
+          <a (click)="redirectToSignIn()" class="nav-link">
+            <i class="fa fa-sign-in fa-fw"></i>
+            {{ messages.auth.signIn }}
+          </a>
+        </li>
+        <li *ngIf="!isAuthenticated" class="nav-item">
+          <a (click)="redirectToSignUp()" class="nav-link">
+            <i class="fa fa-user-plus fa-fw"></i>
+            {{ messages.auth.signUp }}
+          </a>
+        </li>
+        <li *ngIf="isAuthenticated" class="nav-item">
+          <a (click)="redirectToAccount()" class="nav-link">
+            <i class="fa fa-user fa-fw"></i>
+            {{ messages.account.account }}
+          </a>
+        </li>
+        <li *ngIf="isAuthenticated" class="nav-item">
+          <a (click)="logout()" class="nav-link">
+            <i class="fa fa-sign-out fa-fw"></i>
+            {{ messages.auth.logout }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a (click)="help()" class="nav-link">
+            <i class="fa fa-question fa-fw"></i>
+            {{ messages.info.help }}
+          </a>
+        </li>
+      </ul>
+
+      <hr style="border-color: #324863">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <span class="nav-link">
+            <app-select-language></app-select-language>
+          </span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link">
+            <app-select-currency></app-select-currency>
+          </span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link">
+            <app-select-country></app-select-country>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

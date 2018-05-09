@@ -1,0 +1,21 @@
+<!--<div class="d-flex align-items-baseline">
+  <label class="d-none d-sm-inline" style="white-space: nowrap;">
+    {{ messages.settings.shipTo }}:&nbsp;
+  </label>
+  <select title="{{ messages.settings.shipTo }}" class="w-100"
+          (change)="onChange()" [(ngModel)]="countryCode">
+    <option *ngFor="let country of countries" value="{{ country.code }}">
+      {{ country.name }}
+    </option>
+  </select>
+</div>-->
+
+<div class="d-flex align-items-baseline">
+  <i class="fa fa-plane fa-fw mr-1"></i>
+  <select title="{{ messages.settings.shipTo }}" class="w-100"
+          (change)="onChange()" [(ngModel)]="countryCode">
+    <option *ngFor="let country of countries" value="{{ country.code }}">
+      {{ country.name }}
+    </option>
+  </select>
+</div>

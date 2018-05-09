@@ -1,0 +1,68 @@
+<app-loading-placeholder *ngIf="authChecker.pending"></app-loading-placeholder>
+
+<div *ngIf="!authChecker.pending">
+
+  <div class="row mb-4">
+    <div class="col">
+      <h1>{{ messages.account.myAccount }}</h1>
+    </div>
+  </div>
+
+  <div *ngIf="!order">
+    <span class="text">
+      <i class="fa fa-spinner fa-pulse"></i>
+    </span>
+  </div>
+
+  <div *ngIf="order" class="row">
+    <div class="col-12 col-md-7">
+      <a routerLink="/{{ locale }}/account" class="link">{{ messages.account.returnToAccountDetails }}</a>
+      <p class="text mt-2">
+        <span>{{ messages.order.order }}: #{{ order.shortId }}</span><br>
+        <span>{{ messages.order.status }}: {{ order.status | orderStatus }}</span><br>
+        <span>{{ messages.order.placed }}: {{ order.date | newDate }}</span>
+      </p>
+      <table class="table mt-4 text">
+        <thead>
+          <tr>
+            <th>{{ messages.product.product }}</th>
+            <th>{{ messages.product.price }}</th>
+            <th>{{ messages.product.quantity }}</th>
+            <th>{{ messages.order.total }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of order.items">
+            <td>
+              <a routerLink="/{{ locale }}/product/detail/{{ item.product.id }}" class="link">
+                {{ getCategory(item.product.categoryId) }}{{ item.product.title }}
+              </a>
+            </td>
+            <td>{{ getItemPrice(item) | newCurrency:false:order.currency.code }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ (getItemPrice(item) * item.quantity) | newCurrency:false:order.currency.code }}</td>
+          </tr>
+
+          <tr>
+            <th colspan="3">{{ messages.order.total }}</th>
+            <th colspan="1">{{ total | newCurrency:false:order.currency.code }}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12 col-md-4 ml-auto">
+      <h3 class="mt-3 mt-md-0" style="text-transform: none;">
+        {{ messages.delivery.shippingAddress }}
+      </h3>
+      <p class="mt-3 mb-2">{{ order.deliveryData.fullName }}</p>
+      <p class="text">
+        <span>{{ order.deliveryData.phone }}</span><br>
+        <span>{{ order.deliveryData.address }}</span><br>
+        <span>{{ order.deliveryData.city }}</span><br>
+        <span>{{ order.deliveryData.postalCode }}</span><br>
+        <span>{{ country }}</span>
+      </p>
+    </div>
+  </div>
+
+</div>

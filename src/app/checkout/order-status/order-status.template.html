@@ -1,0 +1,174 @@
+<div class="row">
+  <div class="col">
+    <a routerLink="/{{ locale }}">
+      <img src="assets/img/misona_gray_logo.png" height="30">
+    </a>
+  </div>
+</div>
+
+<div *ngIf="isPending" class="pending-placeholder text-center">
+    <span class="text-muted">
+      <span>{{ messages.order.loadingOrder }}</span><br>
+      <i class="fa fa-spinner fa-pulse"></i>
+    </span>
+</div>
+
+<div *ngIf="!isPending" class="row mt-3 mt-md-5">
+  <div class="col-12 col-md-6 col-lg-5 ml-lg-auto order-md-2">
+    <app-checkout-items *ngIf="order" [items]="order.items" [currency]="order.currency"></app-checkout-items>
+  </div>
+
+  <div class="col-12 col-md-6 order-md-1">
+    <div *ngIf="order.deliveryData" class="row">
+      <div class="d-none d-sm-inline col-1 col-md-2 col-lg-1">
+        <i class="fa fa-check-circle-o fa-4x text-primary"></i>
+      </div>
+      <div class="col-10 ml-3 ml-md-0 ml-lg-3">
+        <h6 class="text">
+          <i class="fa fa-check-circle-o text-primary d-sm-none"></i>
+          {{ messages.order.order }} #{{ order.shortId }}
+        </h6>
+        <h5>{{ messages.common.thankYou }}&nbsp;{{ fullName }}!</h5>
+      </div>
+
+      <!--<div class="col-12 mt-3">
+        <p class="text">
+          {{ messages.checkout.yourOrderNumberIs }}
+          <b>#{{ order.shortId }}</b>.
+          {{ messages.checkout.itWillBeNeededToTrack }}
+        </p>
+
+        <p class="text">
+          {{ messages.checkout.trackYourOrderStatusHere }}
+          <a href="{{ orderStatusUrl }}" target="_blank" class="link">
+            {{ orderStatusUrl }}
+          </a>
+        </p>
+
+        <p class="text mb-0">
+          {{ messages.checkout.toRepeatOrShare }}
+          <a href="{{ repeatOrderUrl }}" target="_blank" class="link">
+            {{ repeatOrderUrl }}
+          </a>
+        </p>
+      </div>-->
+    </div>
+
+    <div *ngIf="!order.deliveryData" class="row">
+      <div class="col-12">
+        <h5>{{ messages.checkout.logInToViewDetails }}</h5>
+        <span class="text">
+            {{ messages.checkout.youCanFindYourOrderNumber }}
+          </span>
+      </div>
+
+      <form class="mt-3 col-12" (submit)="onSubmit()" ngNativeValidate>
+        <div *ngIf="isCredentialsInvalid" class="alert alert-danger">
+          {{ messages.validation.invalidEmailorOrderNumber }}
+        </div>
+
+        <div class="form-group">
+          <input
+            [(ngModel)]="email"
+            type="email"
+            required
+            name="email"
+            placeholder="{{ messages.user.email }}"
+            class="form-control">
+        </div>
+
+        <div class="form-group position-relative">
+          <input
+            [(ngModel)]="shortId"
+            name="shortId"
+            required
+            pattern="^[0-9]+$"
+            placeholder="{{ messages.order.orderNumber }}"
+            title="{{ messages.validation.digitsOnly }}"
+            class="form-control" style="padding-left: 24px;">
+          <span class="position-absolute"
+                style="top: 7.5px; left: 13px; color: gray;">#</span>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <app-submit-button
+              label="{{ messages.checkout.logInInfinitive }}"
+              [isPending]="isFormPending">
+            </app-submit-button>
+          </div>
+          <!--<div class="col-8 text-right">
+            <span class="text">{{ messages.checkout.notCustomer }}</span><br>
+            <span class="text">{{ messages.checkout.youAlsoCan }}</span>
+            <a routerLink="/{{ locale }}/checkout/{{ id }}" class="link" style="white-space: nowrap;">
+              {{ messages.checkout.buyThisProduct }}&nbsp;&gt;
+            </a>
+          </div>-->
+        </div>
+
+      </form>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-body">
+        <h5>{{ messages.checkout.yourOrderIsConfirmed }}</h5>
+        <span class="text">
+            {{ messages.checkout.weVeAcceptedYourOrder }}
+          </span>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5>{{ messages.checkout.orderUpdates }}</h5>
+        <span *ngIf="order.deliveryData" class="text">
+            <span class="text-muted">{{ messages.checkout.updatesWillBeSentTo }}</span>
+            {{ order.deliveryData.email }}
+          </span>
+        <span *ngIf="!order.deliveryData" class="text-muted">{{ messages.checkout.logInToView }}</span>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5>{{ messages.checkout.customerInfo }}</h5>
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+            <h6 class="mt-3">{{ messages.delivery.shippingAddress }}</h6>
+            <ng-container *ngIf="order.deliveryData">
+              <span class="text">{{ order.deliveryData.fullName }}</span><br>
+              <span class="text">{{ order.deliveryData.phone }}</span><br>
+              <span class="text">{{ order.deliveryData.address }}</span><br>
+              <span class="text">{{ order.deliveryData.city }}</span><br>
+              <span class="text">{{ order.deliveryData.postalCode }}</span><br>
+              <span class="text">{{ country }}</span>
+            </ng-container>
+            <span  *ngIf="!order.deliveryData" class="text-muted">
+                {{ messages.checkout.logInToView }}
+              </span>
+          </div>
+          <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+            <h6 class="mt-3">{{ messages.checkout.paymentMethod }}</h6>
+            <span *ngIf="order.deliveryData" class="text">PayPal</span>
+            <span *ngIf="!order.deliveryData" class="text-muted">
+                {{ messages.checkout.logInToView }}
+              </span>
+          </div>
+        </div>
+      </div><!-- .row -->
+    </div><!-- .card -->
+
+    <div class="row mt-4 flex-row-reverse">
+      <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+        <a routerLink="/{{ locale }}" class="btn btn-primary w-100 p-3" style="text-transform: none;">
+          {{ messages.common.continueShopping }}
+        </a>
+      </div>
+      <div class="col-12 text-center col-sm-6 text-sm-left col-md-12 text-md-center col-lg-6">
+        <i class="text-muted fa fa-question-circle fa-lg mt-3"></i>&nbsp;<span class="text">{{ messages.info.needHelp }}</span>&nbsp;<a routerLink="/{{ locale }}/info/help" fragment="contact-us" class="link">{{ messages.info.contactUs }}</a>
+      </div>
+    </div>
+
+  </div><!-- .row -->
+</div>

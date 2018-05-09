@@ -1,0 +1,23 @@
+<section id="headerAuthLinks">
+
+  <ng-container *ngIf="pending">
+    <small>{{ messages.auth.signingIn }}</small>&nbsp;<i class="fa fa-spinner fa-pulse"></i>
+  </ng-container>
+
+  <ng-container *ngIf="!pending">
+    <ng-container *ngIf="fullName">
+      <small>{{ messages.auth.loggedInAs }} </small>
+      <a routerLink="/{{ locale }}/account" class="auth-link">{{ fullName }}</a>
+      <small>&nbsp;-&nbsp;</small>
+      <span (click)="logout()" class="auth-link">{{ messages.auth.logout }}</span>
+    </ng-container>
+
+    <ng-container *ngIf="!fullName">
+      <a id="headerSignInLink" routerLink="/{{ locale }}/auth/sign-in" class="auth-link">
+        {{ messages.auth.signIn }}</a>
+      <small>&nbsp;{{ messages.common.or }}&nbsp;</small>
+      <a id="headerSignUpLink" routerLink="/{{ locale }}/auth/sign-up" class="auth-link">
+        {{ messages.auth.createAccount }}</a>
+    </ng-container>
+  </ng-container>
+</section>

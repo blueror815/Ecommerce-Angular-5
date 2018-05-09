@@ -1,0 +1,65 @@
+<app-loading-placeholder
+  *ngIf="!products"
+  message="{{ messages.product.searchingForProducts }}">
+</app-loading-placeholder>
+
+<div *ngIf="products" class="row">
+  <div *ngIf="!products.length" class="col pt-5 pb-4">
+    <p class="text-muted mb-4">{{ messages.product.noProductsWereFound }}</p>
+    <p class="text-muted mb-0">
+      {{ messages.product.tryUpdatingSearchQuery }}<br>
+      {{ messages.common.or }}
+      <a routerLink="/{{ locale }}" class="link">
+        {{ messages.product.browseByCategories }}</a>.
+    </p>
+  </div>
+
+  <div *ngIf="products.length" class="col">
+    <div class="grid-view row">
+      <div *ngFor="let product of displayProducts"
+           class="grid-item col-6 col-sm-4 col-md-4 col-lg-3">
+        <a routerLink="/{{ locale }}/product/detail/{{ product.id }}"
+           title="{{ product.title }}">
+          <div class="img-square mb-2">
+            <div class="img-content">
+              <img src="{{ product.imageUrls[0] }}">
+            </div>
+          </div>
+          <!--<img src="{{ product.imageUrls[0] }}" class="img-fluid">-->
+          <span class="mb-1">{{ getCategory(product.categoryId) }}{{ product.title }}</span>
+          <h3>{{ product.price | newCurrency }}</h3>
+        </a>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="row mt-3">
+      <div class="col">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage <= 1">
+            <span (click)="renderProducts(currentPage - 1)"
+                  class="page-link" style="cursor: pointer;">
+              &laquo;
+            </span>
+          </li>
+
+          <li *ngFor="let page of pages" class="page-item"
+              [class.active]="page === currentPage">
+            <span (click)="renderProducts(page)"
+                  class="page-link" style="cursor: pointer;">
+              {{ page }}
+            </span>
+          </li>
+
+          <li class="page-item" [class.disabled]="currentPage >= pages.length">
+            <span (click)="renderProducts(currentPage + 1)"
+                  class="page-link" style="cursor: pointer;">
+              &raquo;
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- .col -->
+</div><!-- .row -->
