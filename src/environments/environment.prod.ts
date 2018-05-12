@@ -6,9 +6,9 @@ import {Locale} from '../app/i18n/locale';
  */
 export const environment: EnvironmentInterface = {
   production: true,
-  apiServerBaseUrl: 'https://api.misona.jp',
+  apiServerBaseUrl: 'https://api.com',
   apiServerTimeout: 10000, // 10 seconds
   defaultLocale: Locale.RU,
-  reCaptchaSiteKey: '6LfwAz4UAAAAAK1s2lOknS-Kky6_f71qw6inINxi',
-  iframeBaseUrl: 'https://dev.misona.jp:8443/descr',
+  reCaptchaSiteKey: 'example',
+  iframeBaseUrl: 'https://api.com/descr',
 };
