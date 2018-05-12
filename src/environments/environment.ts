@@ -14,6 +14,6 @@ export const environment: EnvironmentInterface = {
   apiServerBaseUrl: 'http://localhost:3005',
   apiServerTimeout: 7000,  // 7 seconds
   defaultLocale: Locale.EN,
-  reCaptchaSiteKey: '6LdkTT4UAAAAAGW4TK9cm-TTZ3gwfF2mdY3KQZbK',
+  reCaptchaSiteKey: 'example',
   iframeBaseUrl: 'http://localhost:8443/descr',
 };
